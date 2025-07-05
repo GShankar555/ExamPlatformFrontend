@@ -35,14 +35,16 @@ export const ExamProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const stored = localStorage.getItem('userAttempts');
     if (stored) {
       setUserAttempts(JSON.parse(stored));
-      const response = apiService.getProblems();
-      response.then(data => {
-        setExams(data.data);
-        console.log('Fetched exams:', data.data);
-      }).catch(error => {
-        console.error('Failed to fetch exams:', error);
-      });
     }
+    const response = apiService.getProblems();
+    response
+      .then((data) => {
+        setExams(data.data);
+        console.log("Fetched exams:", data.data);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch exams:", error);
+      });
   }, []);
 
   const startExam = (examId: string) => {
